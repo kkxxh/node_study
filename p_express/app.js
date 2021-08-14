@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
 
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser(process.env.COOKIE_SECRET)); //cookie-parser는 요청에 동봉된 쿠키를 해석해 req.cookies객체로 만듬
 app.use(session({
     resave:false,
     saveUninitialized:false,
