@@ -7,6 +7,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 
 dotenv.config();
+const indexRouter = require('./routes');
+const userRouter = require('./routes/user');
 
 const app = express(); //express 모듈을 실행해 app 변수에 할당
 app.set('port', process.env.PORT || 3000); 
@@ -36,6 +38,13 @@ app.use(session({
 app.use((req,res,next) => {
     console.log('모든 요청에 다 실행됩니다.');
     next();
+});
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+
+app.use((req,res,next) => {
+    res.status(404).send('Not Found');
 });
 
 app.get('/',(req,res,next) => {
